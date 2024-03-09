@@ -1,17 +1,28 @@
 from colorama import Fore, Style
+import json
 
 class Todo:
     def __init__(self):
         self.todos = []
+    def __save_to_file(self, filename):
+            with open(filename, 'w') as file:
+                json.dump(self.todos, file)
 
+    def __load_from_file(self, filename):
+            with open(filename, 'r') as file:
+                self.todos = json.load(file)
     def create(self, item):
+        
         self.todos.append(item)
+        self.__save_to_file("todos.json")
         print(f"{Fore.GREEN}Todo item '{item}' created successfully!{Style.RESET_ALL}")
 
     def read(self):
         if not self.todos:
             print(f"{Fore.YELLOW}No todo items found.{Style.RESET_ALL}")
+            self.__load_from_file("todos.json")
         else:
+            self.__load_from_file("todos.json")
             print(f"{Fore.CYAN}Todo items:{Style.RESET_ALL}")
             for i, item in enumerate(self.todos, start=1):
                 print(f"{i}. {item}")

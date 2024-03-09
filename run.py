@@ -1,3 +1,4 @@
+import datetime
 import todo
 from colorama import init, Fore
 
@@ -16,16 +17,22 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            # TODO: Implement create todo item functionality
             print("Create a new todo item")
             
-            item = input("Enter the todo item: ")
+            item_name = input("Enter the todo item title: ")
+            desc = input("Enter the todo item description: ")
+            timeStamp = datetime.datetime.now()
+            progress = input("Enter the progress of the task: ")
+            item = {
+                "title": item_name,
+                "description": desc,
+                "time": timeStamp.isoformat(),
+                "progress": progress
+            }
             Todo.create(item)
         elif choice == "2":
             print("Read a todo item")
             Todo.read()
-            # TODO: Implement read todo item functionality
-            
         elif choice == "3":
             # TODO: Implement update todo item functionality
             Todo.update(1, "Submit report") 
@@ -33,8 +40,9 @@ def main():
             # TODO: Implement list all todo items functionality
             Todo.read()
         elif choice == "5":
-            # TODO: Implement delete todo item functionality
-            Todo.delete(1)
+            delete_choice = input("Enter the index of the todo item to delete: ")
+            
+            Todo.delete(int(delete_choice))
             
         elif choice == "0":
             print("Exiting...")
