@@ -33,11 +33,21 @@ def main():
         elif choice == "2":
             print("Read a todo item")
             Todo.read()
+            
         elif choice == "3":
-            # TODO: Implement update todo item functionality
-            Todo.update(1, "Submit report") 
+           choice = input("Enter the index of the todo item to update: ")
+           new_title = input("Enter the new title: ")
+           new_discription = input("Enter the new description: ")
+           new_time = datetime.datetime.now()
+           new_progress = input("Enter the new progress: ")
+           Todo.update(int(choice), {
+                "title": new_title,
+                "description": new_discription,
+                "time": new_time.isoformat(),
+                "progress": new_progress
+            }) 
         elif choice == "4":
-            # TODO: Implement list all todo items functionality
+            
             Todo.read()
         elif choice == "5":
             delete_choice = input("Enter the index of the todo item to delete: ")
